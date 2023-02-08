@@ -1,22 +1,16 @@
 package com.example.forum.service
 
-import com.example.forum.model.User
-import com.example.forum.utils.UserUtil
+import com.example.forum.model.ForumUser
+import com.example.forum.repository.UserRepository
 import org.springframework.stereotype.Service
+import java.util.*
 
 @Service
-class UserService {
-    private var users = UserUtil().users()
+class UserService(private val userRepository: UserRepository) {
 
-    fun list(): List<User> {
-        return users
-    }
+    fun list(): List<ForumUser> = userRepository.findAll()
 
-    fun getById(id: Long): User {
-        return users.first { it.id == id }
-    }
+    fun getById(id: Long): Optional<ForumUser> = userRepository.findById(id)
 
-    fun add(course: User) {
-        users.plus(course)
-    }
+    fun add(forumUser: ForumUser): ForumUser = userRepository.save(forumUser)
 }

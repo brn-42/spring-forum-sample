@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  forum_api_db:
+    image: postgres:15.1
+    environment:
+      POSTGRES_DATABASE: forum_api_db
+      POSTGRES_USER: forum_api_user
+      POSTGRES_PASSWORD: forum_api_pass
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./data.sql:/docker-entrypoint-initdb.d/data.sql

@@ -1,23 +1,16 @@
 package com.example.forum.service
 
 import com.example.forum.model.Course
-import com.example.forum.utils.CourseUtils
+import com.example.forum.repository.CourseRepository
 import org.springframework.stereotype.Service
+import java.util.Optional
 
 @Service
-class CourseService {
+class CourseService(private val courseRepository: CourseRepository) {
 
-    private var courses = CourseUtils().courses()
+    fun list(): List<Course> = courseRepository.findAll()
 
-    fun list(): List<Course> {
-        return courses
-    }
+    fun getById(id: Long): Optional<Course> = courseRepository.findById(id)
 
-    fun getById(id: Long): Course {
-        return courses.first { it.id == id }
-    }
-
-    fun add(course: Course) {
-        courses.plus(course)
-    }
+    fun add(course: Course): Course = courseRepository.save(course)
 }

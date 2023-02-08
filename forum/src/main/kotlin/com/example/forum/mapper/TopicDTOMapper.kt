@@ -4,7 +4,7 @@ import com.example.forum.dto.TopicRequestDTO
 import com.example.forum.dto.TopicResponseDTO
 import com.example.forum.model.Course
 import com.example.forum.model.Topic
-import com.example.forum.model.User
+import com.example.forum.model.ForumUser
 
 fun Topic.toResponseDTO() =
     TopicResponseDTO(
@@ -15,9 +15,8 @@ fun Topic.toResponseDTO() =
         createdAt = createdAt
     )
 
-fun TopicRequestDTO.toModel(id: Long, course: Course, author: User) =
+fun TopicRequestDTO.toModel(course: Course, author: ForumUser) =
     Topic(
-        id = id,
         title = title,
         message = message,
         course = course,

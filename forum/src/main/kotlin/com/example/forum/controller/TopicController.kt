@@ -6,6 +6,7 @@ import com.example.forum.dto.TopicResponseDTO
 import com.example.forum.service.TopicService
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.transaction.annotation.Transactional
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -29,10 +30,11 @@ class TopicController(private val topicService: TopicService) {
 
     @GetMapping("/{id}")
     fun getById(@PathVariable id: Long): TopicResponseDTO {
-        return topicService.getById(id)
+        return topicService.getById(id).orElseThrow()
     }
 
     @PostMapping
+    @Transactional
     fun add(
         @RequestBody @Valid topic: TopicRequestDTO,
         uriComponentsBuilder: UriComponentsBuilder
@@ -44,11 +46,13 @@ class TopicController(private val topicService: TopicService) {
     }
 
     @PutMapping
+    @Transactional
     fun update(@RequestBody @Valid topic: TopicRequestUpdateDTO): ResponseEntity<TopicResponseDTO> {
         return ResponseEntity.ok(topicService.update(topic))
     }
 
     @DeleteMapping("/{id}")
+    @Transactional
     @ResponseStatus(HttpStatus.NO_CONTENT)
     fun delete(@PathVariable id: Long) = topicService.delete(id)
 }
