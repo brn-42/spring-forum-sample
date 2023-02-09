@@ -1,10 +1,9 @@
 package com.example.forum.service
 
-import com.example.forum.dto.TopicRequestDTO
-import com.example.forum.dto.TopicRequestUpdateDTO
-import com.example.forum.dto.TopicResponseDTO
+import com.example.forum.dto.request.TopicRequestDTO
+import com.example.forum.dto.request.TopicRequestUpdateDTO
 import com.example.forum.mapper.toModel
-import com.example.forum.mapper.toResponseDTO
+import com.example.forum.model.Topic
 import com.example.forum.repository.TopicRepository
 import org.springframework.stereotype.Service
 import java.util.*
@@ -16,22 +15,22 @@ class TopicService(
     private val userService: UserService
 ) {
 
-    fun list(): List<TopicResponseDTO> = topicRepository.findAll().map { it.toResponseDTO() }
+    fun list(): List<Topic> = topicRepository.findAll()
 
-    fun getById(id: Long): Optional<TopicResponseDTO> = topicRepository.findById(id)?.map { it.toResponseDTO() }
+    fun getById(id: Long): Optional<Topic> = topicRepository.findById(id)
 
-    fun add(topicRequestDTO: TopicRequestDTO): TopicResponseDTO = topicRepository.save(
+    fun add(topicRequestDTO: TopicRequestDTO): Topic = topicRepository.save(
         topicRequestDTO.toModel(
             course = courseService.getById(topicRequestDTO.courseId).orElseThrow(),
             author = userService.getById(topicRequestDTO.authorId).orElseThrow()
         )
-    ).toResponseDTO()
+    )
 
-    fun update(topic: TopicRequestUpdateDTO): TopicResponseDTO {
+    fun update(topic: TopicRequestUpdateDTO): Topic {
         val topicToUpdate = topicRepository.findById(topic.id).orElseThrow()
         topicToUpdate.title = topic.title
         topicToUpdate.message = topic.message
-        return topicToUpdate.toResponseDTO()
+        return topicToUpdate
     }
 
     fun delete(id: Long) = topicRepository.deleteById(id)

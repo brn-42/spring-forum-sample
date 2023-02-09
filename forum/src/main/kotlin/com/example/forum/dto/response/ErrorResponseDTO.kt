@@ -1,4 +1,4 @@
-package com.example.forum.dto
+package com.example.forum.dto.response
 
 data class ErrorResponseDTO(
     val statusCode: Int,

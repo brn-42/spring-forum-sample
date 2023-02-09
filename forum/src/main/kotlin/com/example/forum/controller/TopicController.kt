@@ -1,8 +1,9 @@
 package com.example.forum.controller
 
-import com.example.forum.dto.TopicRequestDTO
-import com.example.forum.dto.TopicRequestUpdateDTO
-import com.example.forum.dto.TopicResponseDTO
+import com.example.forum.dto.request.TopicRequestDTO
+import com.example.forum.dto.request.TopicRequestUpdateDTO
+import com.example.forum.dto.response.TopicResponseDTO
+import com.example.forum.mapper.toResponseDTO
 import com.example.forum.service.TopicService
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -25,30 +26,31 @@ class TopicController(private val topicService: TopicService) {
 
     @GetMapping
     fun list(): List<TopicResponseDTO> {
-        return topicService.list()
+        return topicService.list().map { it.toResponseDTO() }
     }
 
     @GetMapping("/{id}")
-    fun getById(@PathVariable id: Long): TopicResponseDTO {
-        return topicService.getById(id).orElseThrow()
-    }
+    fun getById(@PathVariable id: Long): ResponseEntity<TopicResponseDTO> =
+        topicService.getById(id).map {
+            ResponseEntity.ok(it.toResponseDTO())
+        }.orElse(ResponseEntity.notFound().build())
 
     @PostMapping
     @Transactional
     fun add(
-        @RequestBody @Valid topic: TopicRequestDTO,
+        @RequestBody
+        @Valid topic: TopicRequestDTO,
         uriComponentsBuilder: UriComponentsBuilder
     ): ResponseEntity<TopicResponseDTO> {
-        val topicResponse = topicService.add(topic)
+        val topicResponse = topicService.add(topic).toResponseDTO()
         val uri = uriComponentsBuilder.path("/topics/${topicResponse.id}").build().toUri()
-
         return ResponseEntity.created(uri).body(topicResponse)
     }
 
     @PutMapping
     @Transactional
     fun update(@RequestBody @Valid topic: TopicRequestUpdateDTO): ResponseEntity<TopicResponseDTO> {
-        return ResponseEntity.ok(topicService.update(topic))
+        return ResponseEntity.ok(topicService.update(topic).toResponseDTO())
     }
 
     @DeleteMapping("/{id}")

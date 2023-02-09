@@ -1,6 +1,6 @@
 package com.example.forum.handler
 
-import com.example.forum.dto.ErrorResponseDTO
+import com.example.forum.dto.response.ErrorResponseDTO
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.MethodArgumentNotValidException

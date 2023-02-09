@@ -1,4 +1,4 @@
-package com.example.forum.dto
+package com.example.forum.dto.request
 
 import javax.validation.constraints.NotEmpty
 import javax.validation.constraints.NotNull

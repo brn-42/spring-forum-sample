@@ -1,4 +1,4 @@
-package com.example.forum.dto
+package com.example.forum.dto.response
 
 import com.example.forum.model.Status
 import java.time.LocalDateTime
