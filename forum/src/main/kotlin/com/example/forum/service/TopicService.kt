@@ -5,6 +5,8 @@ import com.example.forum.dto.request.TopicRequestUpdateDTO
 import com.example.forum.mapper.toModel
 import com.example.forum.model.Topic
 import com.example.forum.repository.TopicRepository
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
 import java.util.*
 
@@ -15,7 +17,12 @@ class TopicService(
     private val userService: UserService
 ) {
 
-    fun list(): List<Topic> = topicRepository.findAll()
+    fun list(courseName: String?, pageable: Pageable): Page<Topic> =
+        courseName?.let {
+            topicRepository.findByCourseName(courseName, pageable)
+        } ?: let {
+            topicRepository.findAll(pageable)
+        }
 
     fun getById(id: Long): Optional<Topic> = topicRepository.findById(id)
 
