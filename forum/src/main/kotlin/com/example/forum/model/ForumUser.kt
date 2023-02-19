@@ -1,5 +1,6 @@
 package com.example.forum.model
 
+import java.io.Serializable
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType
@@ -12,4 +13,4 @@ data class ForumUser(
     val id: Long? = null,
     var name: String,
     var email: String
-)
+): Serializable

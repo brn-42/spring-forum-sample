@@ -1,5 +1,6 @@
 package com.example.forum.model
 
+import java.io.Serializable
 import java.time.LocalDateTime
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
@@ -19,4 +20,4 @@ data class Response(
     @ManyToOne
     val topic: Topic,
     val resolved: Boolean
-)
+): Serializable

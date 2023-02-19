@@ -1,5 +1,6 @@
 package com.example.forum.model
 
+import java.io.Serializable
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType
@@ -13,4 +14,4 @@ data class Course(
     val id: Long? = null,
     val name: String,
     val category: String
-)
+): Serializable

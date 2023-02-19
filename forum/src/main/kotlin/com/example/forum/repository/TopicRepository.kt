@@ -9,4 +9,10 @@ import org.springframework.data.jpa.repository.JpaRepository
 interface TopicRepository: JpaRepository<Topic, Long> {
     @Cacheable("topicsByCourseName")
     fun findByCourseName(courseName: String, pageable: Pageable): Page<Topic>
+
+    @Cacheable("findAllTopics")
+    override fun findAll(): List<Topic>
+
+    @Cacheable("getById")
+    override fun getById(id: Long): Topic
 }

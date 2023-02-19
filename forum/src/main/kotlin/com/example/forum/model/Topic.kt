@@ -1,5 +1,6 @@
 package com.example.forum.model
 
+import java.io.Serializable
 import java.time.LocalDateTime
 import javax.persistence.Entity
 import javax.persistence.EnumType
@@ -30,5 +31,5 @@ data class Topic(
 
     @OneToMany(mappedBy = "topic")
     val responses: List<Response> = ArrayList()
-)
+): Serializable
 
