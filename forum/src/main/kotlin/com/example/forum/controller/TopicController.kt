@@ -69,4 +69,5 @@ class TopicController(private val topicService: TopicService) {
     @Transactional
     @ResponseStatus(HttpStatus.NO_CONTENT)
     fun delete(@PathVariable id: Long) = topicService.delete(id)
+
 }

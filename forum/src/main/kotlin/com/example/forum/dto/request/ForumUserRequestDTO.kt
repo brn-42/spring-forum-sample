@@ -11,4 +11,8 @@ data class ForumUserRequestDTO(
     @field: NotEmpty(message = "email cant be empty")
     @field: Size(min = 2, max = 100, message = "email must have between 2 and 100 characters")
     val email: String,
+
+    @field: NotEmpty(message = "password cant be empty")
+    @field: Size(min = 3, max = 100, message = "password must have between 3 and 100 characters")
+    val password: String,
 )

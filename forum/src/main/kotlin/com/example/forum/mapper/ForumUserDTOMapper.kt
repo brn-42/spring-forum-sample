@@ -14,5 +14,6 @@ fun ForumUser.toResponseDTO() =
 fun ForumUserRequestDTO.toModel() =
     ForumUser(
         name = name,
-        email = email
+        email = email,
+        password = password
     )

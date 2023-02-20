@@ -12,5 +12,6 @@ data class ForumUser(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null,
     var name: String,
-    var email: String
+    var email: String,
+    var password: String
 ): Serializable
