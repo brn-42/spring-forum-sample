@@ -14,7 +14,6 @@ import java.util.*
 @Service
 class UserService(private val userRepository: UserRepository): UserDetailsService {
 
-    // TODO fix this cache
     @Cacheable("findAllForumUsers")
     fun list(): List<ForumUser> = userRepository.findAll()
 

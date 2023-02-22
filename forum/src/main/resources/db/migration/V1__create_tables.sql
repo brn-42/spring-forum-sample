@@ -1,4 +1,3 @@
-
 create table course(
     id serial not null,
     name varchar(50) not null,

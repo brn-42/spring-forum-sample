@@ -11,7 +11,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.security.web.SecurityFilterChain
 
-
 @Configuration
 @EnableWebSecurity
 class SecurityConfig(
@@ -22,6 +21,9 @@ class SecurityConfig(
     fun filterChain(http: HttpSecurity): SecurityFilterChain {
         http.authorizeHttpRequests { auth ->
             auth
+                .antMatchers("/topics")
+                .hasAuthority("READ_ONLY")
+
                 .anyRequest()
                 .authenticated()
                 .and()

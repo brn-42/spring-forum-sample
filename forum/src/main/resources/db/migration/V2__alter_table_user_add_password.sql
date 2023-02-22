@@ -1,2 +1,1 @@
-
-ALTER TABLE forum_user ADD COLUMN password text;
+alter table forum_user add column password text;
