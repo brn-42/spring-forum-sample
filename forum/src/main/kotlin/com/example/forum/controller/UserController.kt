@@ -34,7 +34,7 @@ class UserController(private val userService: UserService) {
         uriComponentsBuilder: UriComponentsBuilder
     ): ResponseEntity<ForumUserResponseDTO> {
         val userResponse = userService.add(user).toResponseDTO()
-        val uri = uriComponentsBuilder.path("/topics/${userResponse.id}").build().toUri()
+        val uri = uriComponentsBuilder.path("/users/${userResponse.id}").build().toUri()
         return ResponseEntity.created(uri).body(userResponse)
     }
 

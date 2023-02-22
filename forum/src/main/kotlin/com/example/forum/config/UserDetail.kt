@@ -1,4 +1,4 @@
-package com.example.forum.service
+package com.example.forum.config
 
 import com.example.forum.model.ForumUser
 import org.springframework.security.core.userdetails.UserDetails

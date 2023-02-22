@@ -21,6 +21,8 @@ data class ForumUser(
 
     @JsonIgnore
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_role")
-    val role: List<Role> = mutableListOf()
+    @JoinColumn(
+        name = "forum_user_role"
+    )
+    var role: List<Role> = mutableListOf()
 ): Serializable

@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service
 import java.util.*
 
 @Service
-class UserService(private val userRepository: UserRepository): UserDetailsService {
+class UserService(private val userRepository: UserRepository) {
 
     @Cacheable("findAllForumUsers")
     fun list(): List<ForumUser> = userRepository.findAll()
@@ -32,8 +32,4 @@ class UserService(private val userRepository: UserRepository): UserDetailsServic
     )
     fun delete(id: Long) = userRepository.deleteById(id)
 
-    override fun loadUserByUsername(username: String?): UserDetails {
-        val user = userRepository.findByEmail(username) ?: throw RuntimeException()
-        return UserDetail(user)
-    }
 }

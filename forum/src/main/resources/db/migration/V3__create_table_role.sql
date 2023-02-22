@@ -16,3 +16,4 @@ create table forum_user_role(
 
 insert into role (id, name) values (1, 'READ_WRITE');
 insert into role (id, name) values (2, 'READ_ONLY');
+insert into role (id, name) values (3, 'ADMIN');
